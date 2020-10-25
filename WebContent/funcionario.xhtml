@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+<title>Cadastro</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="estilo.css" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</head>
+<h:body>
+
+	<h:form class="formulario">
+		<fieldset>
+			<LEGEND>Formulário Funcionário</LEGEND>
+			<h:panelGrid columns="2">
+				<h:outputText value="Nome" for="idNome" />
+				<h:inputText id="idNome"
+					value="#{funcionarioController.funcionario.nome}" />
+
+				<h:outputText value="CPF" for="idCpf" />
+				<h:inputText id="idCpf" class="cpfClass"
+					value="#{funcionarioController.funcionario.cpf}" />
+
+				<h:outputText value="Telefone" for="idTelefone" />
+				<h:inputText id="idTelefone" class="foneClass"
+					value="#{funcionarioController.funcionario.telefone}" />
+
+				<h:outputText value="Endereço" for="idEndereco" />
+				<h:inputText id="idEndereco"
+					value="#{funcionarioController.funcionario.endereco}" />
+
+				<h:outputText value="Cargo" for="idCargo" />
+				<h:inputText id="idCargo"
+					value="#{funcionarioController.funcionario.cargo}" />
+
+				<h:outputText value="Salário" for="idSalario" />
+				<h:inputText id="idSalario"
+					value="#{funcionarioController.funcionario.salario}" />
+
+				<h:commandButton value="Gravar"
+					action="#{funcionarioController.gravar}" onclick="msg()" />
+
+			</h:panelGrid>
+		</fieldset>
+	</h:form>
+
+	<br></br>
+
+	<h:form>
+
+		<h:dataTable value="#{funcionarioController.todosFuncionarios}"
+			var="func" border="1">
+			<h:column>
+				<f:facet name="header"> Nome </f:facet>
+				<h:outputText value="#{func.nome}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header"> CPF </f:facet>
+				<h:outputText value="#{func.cpf}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header"> Telefone </f:facet>
+				<h:outputText value="#{func.telefone}" />
+			</h:column>
+
+
+			<h:column>
+				<f:facet name="header"> Endereço </f:facet>
+				<h:outputText value="#{func.endereco}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header"> Cargo </f:facet>
+				<h:outputText value="#{func.cargo}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header"> Salário </f:facet>
+				<h:outputText value="#{func.salario}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header"> Alterar </f:facet>
+				<h:commandButton value="Alterar"
+					action="#{funcionarioController.carregar(func)}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header"> Remover </f:facet>
+				<h:commandButton value="Remover"
+					action="#{funcionarioController.remover(func)}" onclick="msg2()" />
+			</h:column>
+
+		</h:dataTable>
+
+	</h:form>
+</h:body>
+
+<script>
+	$(document).ready(function() {
+		$(".cpfClass").mask('000.000.000-00', {
+			reverse : true
+		});
+		$(".foneClass").mask('(00) 0000-00009');
+	});
+
+	function msg() {
+		alert("Gravado com sucesso!");
+	}
+	function msg2() {
+		alert("Removido com sucesso!");
+	}
+</script>
+
+</html>
