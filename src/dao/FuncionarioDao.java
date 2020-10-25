@@ -7,24 +7,25 @@ import java.util.LinkedList;
 import java.util.List;
 import modelo.Funcionario;
 
-//classe Dao est· relacionada com questoes de persistencia no banco
-//Create, Read, Update and Delete- s„o as quatro operaÁıes b·sicas (criaÁ„o, consulta, atualizaÁ„o e exclusao de dados) 
+//classe Dao est√° relacionada com questoes de persistencia no banco
+//Create, Read, Update and Delete- s√£o as quatro opera√ß√µes b√°sicas (cria√ß√£o, consulta, atualiza√ß√£o e exclusao de dados) 
 public class FuncionarioDao {
 
-	// passa o objeto da Funcionario - Adiciona informaÁıes no banco
+	// passa o objeto da Funcionario - Adiciona informa√ß√µes no banco
 	public void adiciona(Funcionario f) throws ClassNotFoundException, SQLException {
 		String sql = "INSERT INTO funcionario (nomeFuncionario, cpfFuncionario, telefoneFuncionario, "
 				+ "enderecoFuncionario, cargoFuncionario, salarioFuncionario) VALUES (?, ?, ?, ?, ?, ?)";
 
-		// objeto associado · conexao, utilizado para executar SQL no banco
+		// objeto associado √° conexao, utilizado para executar SQL no banco
 		PreparedStatement comandoSql = Conexao.getInstance().prepareStatement(sql);
-		// setar cada interrogaÁ„o
+		// setar cada interroga√ß√£o
 		comandoSql.setString(1, f.getNome());
 		comandoSql.setString(2, f.getCpf());
 		comandoSql.setString(3, f.getTelefone());
 		comandoSql.setString(4, f.getEndereco());
 		comandoSql.setString(5, f.getCargo());
 		comandoSql.setDouble(6, f.getSalario());
+		comandoSql.setInt(7, f.getId());
 
 		// executa o 'comandoSql
 		comandoSql.execute();
@@ -54,7 +55,7 @@ public class FuncionarioDao {
 	public void remove(int id) throws ClassNotFoundException, SQLException {
 		String sql = "DELETE FROM funcionario WHERE idFuncionario=?";
 
-		// o objeto 'comandoSql' associado a conexao, È utilizado para executar a sql
+		// o objeto 'comandoSql' associado a conexao, √© utilizado para executar a sql
 		PreparedStatement comandoSql = Conexao.getInstance().prepareStatement(sql);
 		comandoSql.setInt(1, id);
 
